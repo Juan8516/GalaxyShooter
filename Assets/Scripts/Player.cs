@@ -5,10 +5,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    //Variables
+    //Triple shoot variable
+    public bool canTripleShoot = false;
 
+    //Variables
     [SerializeField]
     private GameObject _laserPrefab;
+    [SerializeField]
+    private GameObject _tripleShootPrefab;
 
     [SerializeField]
     private float _fireRate = 0.25f;
@@ -65,13 +69,21 @@ public class Player : MonoBehaviour
 
     private void Fire()
     {
-
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             if (Time.time > _canFire)
             {
-                Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.9f, 0), Quaternion.identity);
-                _canFire = Time.time + -_fireRate;
+                if (canTripleShoot == true)
+                {
+                    //Triple Shoot
+                    Instantiate(_tripleShootPrefab, transform.position, Quaternion.identity);
+                    _canFire = Time.time + _fireRate;
+                }
+                else 
+                {
+                    Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.9f, 0), Quaternion.identity);
+                    _canFire = Time.time + _fireRate;
+                }
             }
         }
     }
