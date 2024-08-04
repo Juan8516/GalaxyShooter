@@ -7,7 +7,6 @@ public class Laser : MonoBehaviour
     //Variables
     private float _speed = 10.0f;
 
-
     // Start is called before the first frame update
     void Start()
     {
