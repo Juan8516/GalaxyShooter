@@ -23,7 +23,7 @@ public class PowerUp : MonoBehaviour
             if (player != null)
             {
                 //Enable tripleshoot
-                player.canTripleShoot = true;
+                player.TripleShootPowerOn();
             }
 
             //Destroy

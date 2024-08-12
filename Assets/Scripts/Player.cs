@@ -87,4 +87,16 @@ public class Player : MonoBehaviour
             }
         }
     }
+
+    public void TripleShootPowerOn()
+    {
+        canTripleShoot = true;
+        StartCoroutine(TripleShootPowerRoutine());
+    }
+
+    public IEnumerator TripleShootPowerRoutine()
+    {
+        yield return new WaitForSeconds(5.0f);
+        canTripleShoot = false;
+    }
 }
