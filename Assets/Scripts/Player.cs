@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     //Triple shoot variable
     public bool canTripleShoot = false;
+    public bool canFlySpeed = false;
 
     //Variables
     [SerializeField]
@@ -43,8 +44,16 @@ public class Player : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        transform.Translate(Vector3.right * _speed * horizontalInput * Time.deltaTime);
-        transform.Translate(Vector3.up * _speed * verticalInput * Time.deltaTime);
+        if(canFlySpeed == true)
+        {
+            transform.Translate(Vector3.right * (_speed * 1.5f) * horizontalInput * Time.deltaTime);
+            transform.Translate(Vector3.up * (_speed * 1.5f) * verticalInput * Time.deltaTime);
+        }
+        else
+        {
+            transform.Translate(Vector3.right * _speed * horizontalInput * Time.deltaTime);
+            transform.Translate(Vector3.up * _speed * verticalInput * Time.deltaTime);
+        }
 
         //Limits player in Y
         if (transform.position.y > 0)
@@ -86,5 +95,29 @@ public class Player : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void TripleShootPowerOn()
+    {
+        canTripleShoot = true;
+        StartCoroutine(TripleShootPowerRoutine());
+    }
+
+    public void SpeedIncrementedOn()
+    {
+        canFlySpeed = true;
+        StartCoroutine(SpeedIncremented());
+    }
+
+    public IEnumerator SpeedIncremented()
+    {
+        yield return new WaitForSeconds(5.0f);
+        canFlySpeed = false;
+    }
+
+    public IEnumerator TripleShootPowerRoutine()
+    {
+        yield return new WaitForSeconds(5.0f);
+        canTripleShoot = false;
     }
 }
