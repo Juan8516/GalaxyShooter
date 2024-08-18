@@ -9,6 +9,9 @@ public class Player : MonoBehaviour
     public bool canTripleShoot = false;
     public bool canFlySpeed = false;
 
+    //Lives player
+    public int lives = 3;
+
     //Variables
     [SerializeField]
     private GameObject _laserPrefab;
@@ -119,5 +122,15 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(5.0f);
         canTripleShoot = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        EnemyIA enemy = other.GetComponent<EnemyIA>();
+
+        if (other.tag == "Enemy")
+        {
+            Destroy(other.gameObject);
+        }
     }
 }

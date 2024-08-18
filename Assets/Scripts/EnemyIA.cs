@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Timeline;
+using Random = UnityEngine.Random;
 
 public class EnemyIA : MonoBehaviour
 {
@@ -27,6 +30,27 @@ public class EnemyIA : MonoBehaviour
         if(transform.position.y < -10)
         {
             transform.position = new Vector3(Random.Range(-8f, 8f), 8f, 0);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Player player = other.GetComponent<Player>();
+        Laser laser = other.GetComponent<Laser>();
+
+        if(other.tag == "Player")
+        {
+            player.lives--;
+
+            if(player.lives <= 0)
+            {
+                Destroy(other.gameObject);
+            }
+        }
+
+        if(other.tag == "Laser")
+        {
+            Destroy(other.gameObject);
         }
     }
 }
