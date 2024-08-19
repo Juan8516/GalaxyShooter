@@ -13,7 +13,9 @@ public class EnemyIA : MonoBehaviour
     public GameObject prefabEnemy;
 
     [SerializeField]
-    private GameObject enemyAnimation;
+    private GameObject _enemyAnimation;
+    [SerializeField]
+    private GameObject _playerAnimationExplotion;
 
     // Start is called before the first frame update
     void Start()
@@ -47,17 +49,18 @@ public class EnemyIA : MonoBehaviour
 
             if(player.lives <= 0)
             {
+                Instantiate(_playerAnimationExplotion, transform.position, Quaternion.identity);
                 Destroy(other.gameObject);
 
             }else if(other.tag == "Player")
             {
-                Instantiate(enemyAnimation, transform.position, Quaternion.identity);
+                Instantiate(_enemyAnimation, transform.position, Quaternion.identity);
             }
         }
 
         if(other.tag == "Laser")
         {
-            Instantiate(enemyAnimation, transform.position, Quaternion.identity);
+            Instantiate(_enemyAnimation, transform.position, Quaternion.identity);
             Destroy(other.gameObject);
         }
     }
