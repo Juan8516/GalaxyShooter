@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Laser
+  - Enemi
   layers:
   - Default
   - TransparentFX
@@ -42,8 +45,8 @@ TagManager:
     uniqueID: 0
     locked: 0
   - name: Background
-    uniqueID: 2137104893
+    uniqueID: 3944510575
     locked: 0
   - name: Foreground
-    uniqueID: 148484191
+    uniqueID: 1333111707
     locked: 0
