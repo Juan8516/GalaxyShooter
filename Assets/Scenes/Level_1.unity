@@ -233,7 +233,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1159758508
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -371,7 +371,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5894261166328919164, guid: 825b79109c3c59c4bbfcd076fd91341e, type: 3}
       propertyPath: speed
-      value: 0.5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6399118794645394184, guid: 825b79109c3c59c4bbfcd076fd91341e, type: 3}
       propertyPath: m_Name
@@ -483,7 +483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canTripleShoot: 0
   canFlySpeed: 0
-  lives: 3
+  lives: 1
   _laserPrefab: {fileID: 4464395816439615358, guid: 6330fa464d4863948b6a09e3b9052aeb, type: 3}
   _tripleShootPrefab: {fileID: 7115910522496356907, guid: 0854adeb100bfcf4dafe93409f911bbf, type: 3}
   _fireRate: 0.25
