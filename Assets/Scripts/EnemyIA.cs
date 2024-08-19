@@ -15,7 +15,7 @@ public class EnemyIA : MonoBehaviour
     [SerializeField]
     private GameObject _enemyAnimation;
     [SerializeField]
-    private GameObject _playerAnimationExplotion;
+    private GameObject _playerAnimationExplosion;
 
     // Start is called before the first frame update
     void Start()
@@ -49,7 +49,7 @@ public class EnemyIA : MonoBehaviour
 
             if(player.lives <= 0)
             {
-                Instantiate(_playerAnimationExplotion, transform.position, Quaternion.identity);
+                Instantiate(_playerAnimationExplosion, transform.position, Quaternion.identity);
                 Destroy(other.gameObject);
 
             }else if(other.tag == "Player")

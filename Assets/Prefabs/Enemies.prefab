@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 211aa35770b4f184b94bcd3db18d833e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
+  speed: 4
   prefabEnemy: {fileID: 6399118794645394184}
   _enemyAnimation: {fileID: 6804425137749402665, guid: 2a8c10778c677774cab9c654854fc70d, type: 3}
-  _playerAnimationExplotion: {fileID: 2023723997559470610, guid: 6e09edecc4559da4690c02c476d717b9, type: 3}
+  _playerAnimationExplosion: {fileID: 2023723997559470610, guid: 6e09edecc4559da4690c02c476d717b9, type: 3}
