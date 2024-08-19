@@ -12,6 +12,9 @@ public class EnemyIA : MonoBehaviour
     public float speed = 4.0f;
     public GameObject prefabEnemy;
 
+    [SerializeField]
+    private GameObject enemyAnimation;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,11 +48,16 @@ public class EnemyIA : MonoBehaviour
             if(player.lives <= 0)
             {
                 Destroy(other.gameObject);
+
+            }else if(other.tag == "Player")
+            {
+                Instantiate(enemyAnimation, transform.position, Quaternion.identity);
             }
         }
 
         if(other.tag == "Laser")
         {
+            Instantiate(enemyAnimation, transform.position, Quaternion.identity);
             Destroy(other.gameObject);
         }
     }
