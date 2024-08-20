@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     private GameObject _laserPrefab;
     [SerializeField]
     private GameObject _tripleShootPrefab;
+    [SerializeField]
+    private GameObject _playerAnimationExplosion;
 
     [SerializeField]
     private float _fireRate = 0.25f;
@@ -100,6 +102,17 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void Demage()
+    {
+        lives--;
+
+        if(lives <= 0)
+        {
+            Instantiate(_playerAnimationExplosion, transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
+        }
+    }
+
     public void TripleShootPowerOn()
     {
         canTripleShoot = true;
@@ -122,15 +135,5 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(5.0f);
         canTripleShoot = false;
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        EnemyIA enemy = other.GetComponent<EnemyIA>();
-
-        if (other.tag == "Enemy")
-        {
-            Destroy(other.gameObject);
-        }
     }
 }
