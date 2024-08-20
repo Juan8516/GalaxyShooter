@@ -233,7 +233,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!64 &1159758508
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -315,7 +315,7 @@ Transform:
   m_GameObject: {fileID: 1159758507}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.025, z: 0}
+  m_LocalPosition: {x: 0, y: 0.0000000949949, z: 0}
   m_LocalScale: {x: 18.183853, y: 10.416395, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -482,6 +482,7 @@ MonoBehaviour:
   lives: 1
   _laserPrefab: {fileID: 4464395816439615358, guid: 6330fa464d4863948b6a09e3b9052aeb, type: 3}
   _tripleShootPrefab: {fileID: 7115910522496356907, guid: 0854adeb100bfcf4dafe93409f911bbf, type: 3}
+  _playerAnimationExplosion: {fileID: 2023723997559470610, guid: 6e09edecc4559da4690c02c476d717b9, type: 3}
   _fireRate: 0.25
   _speed: 5
 --- !u!61 &1846136649
@@ -624,10 +625,6 @@ PrefabInstance:
     - target: {fileID: 202500315704109403, guid: 3b9907040506b5945af69e8f2fce2145, type: 3}
       propertyPath: m_Name
       value: Triple_Shoot_Powerup
-      objectReference: {fileID: 0}
-    - target: {fileID: 202500315704109403, guid: 3b9907040506b5945af69e8f2fce2145, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2209613026824392803, guid: 3b9907040506b5945af69e8f2fce2145, type: 3}
       propertyPath: m_LocalPosition.x
