@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class Player : MonoBehaviour
     //Triple shoot variable
     public bool canTripleShoot = false;
     public bool canFlySpeed = false;
+    public bool canProtectedShield = false;
 
     //Lives player
     public int lives = 3;
@@ -16,9 +18,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _laserPrefab;
     [SerializeField]
-    private GameObject _tripleShootPrefab;
+    private GameObject _tripleShootPrefab;    
     [SerializeField]
     private GameObject _playerAnimationExplosion;
+    [SerializeField]
+    private GameObject _shieldActive;
 
     [SerializeField]
     private float _fireRate = 0.25f;
@@ -104,13 +108,25 @@ public class Player : MonoBehaviour
 
     public void Demage()
     {
-        lives--;
-
-        if(lives <= 0)
+        if (canProtectedShield == true)
         {
-            Instantiate(_playerAnimationExplosion, transform.position, Quaternion.identity);
-            Destroy(this.gameObject);
-        }
+            canProtectedShield = false;
+            _shieldActive.gameObject.SetActive(false);
+            return;
+        }   
+            lives--;
+
+            if (lives <= 0)
+            {
+                Instantiate(_playerAnimationExplosion, transform.position, Quaternion.identity);
+                Destroy(this.gameObject);
+            }
+    }
+
+    public void SpeedIncrementedOn()
+    {
+        canFlySpeed = true;
+        StartCoroutine(SpeedIncremented());
     }
 
     public void TripleShootPowerOn()
@@ -119,10 +135,10 @@ public class Player : MonoBehaviour
         StartCoroutine(TripleShootPowerRoutine());
     }
 
-    public void SpeedIncrementedOn()
+    public void IsShieldActive()
     {
-        canFlySpeed = true;
-        StartCoroutine(SpeedIncremented());
+        canProtectedShield = true;
+        _shieldActive.gameObject.SetActive(true);
     }
 
     public IEnumerator SpeedIncremented()
@@ -136,4 +152,5 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(5.0f);
         canTripleShoot = false;
     }
+
 }
