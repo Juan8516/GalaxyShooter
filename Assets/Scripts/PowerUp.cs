@@ -29,13 +29,16 @@ public class PowerUp : MonoBehaviour
                 {
                     //Enable tripleshoot
                     player.TripleShootPowerOn();
-                }else if (_powerId == 1)
+                }
+                else if (_powerId == 1)
                 {
                     //speed incremented
                     player.SpeedIncrementedOn();
-                }else if (_powerId == 2)
+                }
+                else if (_powerId == 2)
                 {
                     //Active shield
+                    player.IsShieldActive();
                 }
             }
 

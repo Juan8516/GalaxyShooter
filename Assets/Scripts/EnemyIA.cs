@@ -55,7 +55,10 @@ public class EnemyIA : MonoBehaviour
 
             if (player != null)
             {
-                player.Demage();
+                if (other.tag == "Player")
+                {
+                    player.Demage();
+                }
             }
 
             Instantiate(_enemyAnimation, transform.position, Quaternion.identity);
