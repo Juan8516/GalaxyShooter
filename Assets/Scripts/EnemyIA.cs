@@ -14,8 +14,6 @@ public class EnemyIA : MonoBehaviour
 
     [SerializeField]
     private GameObject _enemyAnimation;
-    [SerializeField]
-    private GameObject _playerAnimationExplosion;
 
     // Start is called before the first frame update
     void Start()
@@ -40,28 +38,28 @@ public class EnemyIA : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Player player = other.GetComponent<Player>();
-        Laser laser = other.GetComponent<Laser>();
-
-        if(other.tag == "Player")
+        if (other.tag == "Laser")
         {
-            player.lives--;
-
-            if(player.lives <= 0)
+            if (other.transform.parent != null)
             {
-                Instantiate(_playerAnimationExplosion, transform.position, Quaternion.identity);
-                Destroy(other.gameObject);
-
-            }else if(other.tag == "Player")
-            {
-                Instantiate(_enemyAnimation, transform.position, Quaternion.identity);
+                Destroy(other.transform.parent.gameObject);
             }
-        }
 
-        if(other.tag == "Laser")
-        {
-            Instantiate(_enemyAnimation, transform.position, Quaternion.identity);
             Destroy(other.gameObject);
+            Instantiate(_enemyAnimation, transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
+        }
+        else if (other.tag == "Player")
+        {
+            Player player = other.GetComponent<Player>();
+
+            if (player != null)
+            {
+                player.Demage();
+            }
+
+            Instantiate(_enemyAnimation, transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
         }
     }
 }
