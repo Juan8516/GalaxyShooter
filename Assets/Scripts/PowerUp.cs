@@ -41,7 +41,6 @@ public class PowerUp : MonoBehaviour
                     player.IsShieldActive();
                 }
             }
-
             //Destroy
             Destroy(this.gameObject);
         }
