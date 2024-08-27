@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.Timeline;
 using Random = UnityEngine.Random;
 
@@ -15,10 +16,13 @@ public class EnemyIA : MonoBehaviour
     [SerializeField]
     private GameObject _enemyAnimation;
 
+    private UIManager _uiManagerText;
+
     // Start is called before the first frame update
     void Start()
     {
         transform.position = new Vector3(0, 6, 0);
+        _uiManagerText = GameObject.Find("Canvas").GetComponent<UIManager>();
     }
 
     // Update is called once per frame
@@ -47,6 +51,7 @@ public class EnemyIA : MonoBehaviour
 
             Destroy(other.gameObject);
             Instantiate(_enemyAnimation, transform.position, Quaternion.identity);
+            _uiManagerText.UpdateScore();
             Destroy(this.gameObject);
         }
         else if (other.tag == "Player")
