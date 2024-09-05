@@ -32,16 +32,28 @@ public class Player : MonoBehaviour
     private float _speed = 5.0f;
 
     private UIManager _uiManager;
+    private GameManager _gameManager;
+
+    private SpawnManager _spawnManager;
 
     // Start is called before the first frame update
     void Start()
     {
-      transform.position = new Vector3(0, -4, 0);
-      _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        transform.position = new Vector3(0, -4, 0);
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
       
         if (_uiManager != null)
         {
             _uiManager.UpdateLives(lives);
+        }
+
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>(); 
+
+        if(_spawnManager != null)
+        {
+            _spawnManager.StarSpawnRoutines();
         }
     }
 
@@ -128,6 +140,8 @@ public class Player : MonoBehaviour
             if (lives <= 0)
             {
                 Instantiate(_playerAnimationExplosion, transform.position, Quaternion.identity);
+                _gameManager.gameOver = false;
+                _uiManager.ShowTitleScreen();
                 Destroy(this.gameObject);
             }
     }
