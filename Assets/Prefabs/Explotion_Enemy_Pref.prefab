@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2920604686377096613}
   - component: {fileID: 6015907977272639940}
   - component: {fileID: 7689254329994570972}
+  - component: {fileID: -1405480802896748396}
   m_Layer: 0
   m_Name: Explotion_Enemy_Pref
   m_TagString: Untagged
@@ -106,3 +107,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-1405480802896748396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6804425137749402665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 005bb1367d3765648bfb8ddb73bf4942, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
