@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class Player : MonoBehaviour
 {
@@ -23,6 +24,17 @@ public class Player : MonoBehaviour
     private GameObject _playerAnimationExplosion;
     [SerializeField]
     private GameObject _shieldActive;
+
+    // Movement boundaries
+    [SerializeField]
+    private float MIN_X = -9.4f;
+    [SerializeField]
+    private float MAX_X = 9.4f;
+    [SerializeField]
+    private float MIN_Y = -4.5f;
+    [SerializeField]
+    private float MAX_Y = 0.0f;
+
 
     [SerializeField]
     private float _fireRate = 0.25f;
@@ -65,44 +77,27 @@ public class Player : MonoBehaviour
 
         //Player fire
         Fire();
+        
+        // Obtén la dirección de entrada y mueve al jugador.
+        Vector3 direction = GetInputDirection();
+        MovePlayer(direction);
     }
 
     private void Movement()
     {
-        //Movement player
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
 
-        if(canFlySpeed == true)
-        {
-            transform.Translate(Vector3.right * (_speed * 1.5f) * horizontalInput * Time.deltaTime);
-            transform.Translate(Vector3.up * (_speed * 1.5f) * verticalInput * Time.deltaTime);
-        }
-        else
-        {
-            transform.Translate(Vector3.right * _speed * horizontalInput * Time.deltaTime);
-            transform.Translate(Vector3.up * _speed * verticalInput * Time.deltaTime);
-        }
+        // Obtén la dirección de entrada
+        Vector3 inputDirection = GetInputDirection();
 
-        //Limits player in Y
-        if (transform.position.y > 0)
-        {
-            transform.position = new Vector3(transform.position.x, 0, 0);
-        }
-        else if (transform.position.y < -4.5)
-        {
-            transform.position = new Vector3(transform.position.x, -4.5f, 0);
-        }
+        // Mueve al jugador
+        MovePlayer(inputDirection);
 
-        //Limits player in X
-        if (transform.position.x > 9.4)
-        {
-            transform.position = new Vector3(-9.4f, transform.position.y, 0);
-        }
-        else if (transform.position.x < -9.4)
-        {
-            transform.position = new Vector3(9.4f, transform.position.y, 0);
-        }
+        // Mantén al jugador dentro de los límites
+        transform.position = new Vector3(
+            Mathf.Clamp(transform.position.x, MIN_X, MAX_X),
+            Mathf.Clamp(transform.position.y, MIN_Y, MAX_Y),
+            transform.position.z
+        );
     }
 
     private void Fire()
@@ -144,6 +139,29 @@ public class Player : MonoBehaviour
                 _uiManager.ShowTitleScreen();
                 Destroy(this.gameObject);
             }
+    }
+
+    // Moviemiento nave
+    private Vector3 GetInputDirection()
+    {
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+
+        return new Vector3(horizontalInput, verticalInput, 0);
+    }
+
+    private void MovePlayer(Vector3 direction)
+    {
+        float adjustedSpeed = canFlySpeed ? _speed * 1.5f : _speed;
+
+        transform.Translate(direction * adjustedSpeed * Time.deltaTime);
+
+        // Mantener al jugador dentro de los límites.
+        transform.position = new Vector3(
+            Mathf.Clamp(transform.position.x, MIN_X, MAX_X),
+            Mathf.Clamp(transform.position.y, MIN_Y, MAX_Y),
+            transform.position.z
+        );
     }
 
     public void SpeedIncrementedOn()
